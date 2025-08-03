@@ -170,13 +170,18 @@ const copyHashToClipboard = async (hash) => {
 
                 {/* Direct Link */}
                 <div className="text-xs text-gray-500 border-t pt-2">
-                  <p>Direct link: <a 
-                    href={`${props.explorerBase}${txHash}`} 
+                  <p>Direct link: 
+                    href={`https://morph-sepolia.blockscout.com/tx/${txHash}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:underline font-mono break-all"
+                  <a 
+                    href={`https://explorer-holesky.morphl2.io/tx/${txHash}`}
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="text-blue-600 hover:underline font-mono break-all"
                   >
-                    {props.explorerBase}{txHash}
+                                      https://morph-sepolia.blockscout.com/tx/{txHash}
                   </a></p>
                 </div>
               </div>
