@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head><title>Morph SDK Demo</title></head>
+<body>
+  <h1>Vendor Checkout Page</h1>
+  <button id="pay">Pay with Crypto</button>
+
+  <script type="module">
+    import { Buffer } from 'buffer';
+    window.Buffer = Buffer;
+
+    import process from 'process';
+    window.process = process;
+
+    import Web3 from "https://cdn.jsdelivr.net/npm/web3@4.6.0/+esm";
+    import { launchMorphPay } from "/src/morph-sdk.jsx";
+    import gatewayAbi from "/abi/PaymentGateway.json" assert { type: "json" };
+
+    const GATEWAY_ADDRESS = "0xaF673968bd6B1c373670c9e82bc8B9059d5037F4";
+    const TOKEN_USDT      = "0x4022210ba16Ab225A2518D9FDBD7c90b5Fb4fF16";
+    const VENDOR_ADDRESS  = "0xC1ba57E13fCa4c273cE541A53bde3c038a41083f";   
+
+    const web3   = new Web3(window.ethereum);
+    const gateway = new web3.eth.Contract(gatewayAbi.abi, GATEWAY_ADDRESS);
+
+    document.getElementById("pay").onclick = () => {
+      launchMorphPay({
+        vendor:        VENDOR_ADDRESS,
+        token:         TOKEN_USDT,
+        amountToken:   "10",     // 10 USDT
+        amountEth:     "0.01",
+        decimals:      6,
+        gateway
+      });
+    };
+  </script>
+</body>
+</html>
